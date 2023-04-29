@@ -24,19 +24,18 @@ class ClienteController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(FormClienteRequest $request)
+    public function create()
     {
-        $cliente = new Cliente();
-        $cliente ->fill($request->all());
-        $cliente->save();
+        
     }
-
     /**
      * Store a newly created resource in storage.
      */
     public function store(FormClienteRequest $request)
     {
-        
+        $cliente = new Cliente();
+        $cliente ->fill($request->all());
+        $cliente->save();
         
     }
 
@@ -79,7 +78,7 @@ class ClienteController extends Controller
         return view('registro_cliente', ['tipo_documentos' => TipoDocumento::all()]);
     } else {
         // El cliente ya está registrado, mostrar formulario de reserva
-        return view('reserva_cliente', ['cliente' => $cliente]);
+        //return view('reserva_cliente', ['cliente' => $cliente]);
     }
     }
 }

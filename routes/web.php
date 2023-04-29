@@ -18,8 +18,7 @@ Route::get('/', [ClienteController::class, 'index'])->name('cliente.home');
 
 Route::get('/validar', [ClienteController::class, 'registroValidar'])->name('cliente.validar');
 
-
-Route::post('/registro', [ClienteController::class, 'create'])->name('cliente.registro');
+Route::post('/registro', [ClienteController::class, 'store'])->name('cliente.registro');
 
 
 

@@ -6,8 +6,8 @@
         <div class="form_group mt-4">
             <label for="estado">Estado</label>
             <select name="estado" id="estado" class="form-control">
-                <option value="{{ $estado->Activo }}">{{ $estado->Activo }}</option>
-                <option value="{{ $estado->Inactivo }}">{{ $estado->Inactivo }}</option>
+                <option value="{{ $estado->'Activo' }}">{{ $estado->Activo }}</option>
+                <option value="{{ $estado->'Inactivo' }}">{{ $estado->Inactivo }}</option>
             </select>
             @error('estado')
             <span class="role-alert-danger" role="alert">
@@ -26,23 +26,10 @@
             @enderror
         </div>
 
-        <div class="form_group mt-4">
-            <label for="nombre">Nombre:</label>
-            <input type="text" name="nombre" id="nombre" class="form-control">
-        </div>
-        <div class="form_group mt-4">
-            <label for="apellidos">Apellidos:</label>
-            <input type="text" name="apellidos" id="apellidos" class="form-control">
-        </div>
 
         <div class="form_group mt-4">
-            <label for="correo_electronico">Correo electrónico:</label>
-            <input type="email" name="correo_electronico" id="correo_electronico" class="form-control">
-        </div>
-
-        <div class="form_group mt-4">
-            <label for="numero_dias">Fecha de inicio:</label>
-            <input type="number" name="numero_dias" id="numero_dias" class="form-control">
+            <label for="numero_dias">Numero de dias:</label>
+            <input type="number"  readonly name="numero_dias" id="numero_dias" class="form-control">
         </div>
 
         <div class="form_group mt-4">

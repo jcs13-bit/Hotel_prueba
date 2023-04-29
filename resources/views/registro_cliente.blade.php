@@ -2,11 +2,11 @@
 @extends("layout")
 @section("contenido")
 <div>
-    <form action="{{route('cliente.registro')}}" method="">
+    <form action="{{route('cliente.registro')}}" method="post">
         @csrf
         <div class="form_group mt-4">
-            <label for="tipo_documento">Tipo de documento</label>
-            <select name="tipo_documento" id="tipo_documento_id" class="form-control">
+            <label for="tipo_documento_id">Tipo de documento</label>
+            <select name="tipo_documento_id" id="tipo_documento_id" class="form-control">
                 @foreach ($tipo_documentos as $tipo_documento)
                 <option value="{{ $tipo_documento->id }}">{{ $tipo_documento->nombre }}</option>
                 @endforeach
@@ -67,7 +67,6 @@
             </span>
             @enderror
         </div>
-
 
         <div class="form_group mt-4">
             <button type="submit" class="btn btn-primary">Registrar</button>
