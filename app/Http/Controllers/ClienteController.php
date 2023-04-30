@@ -6,6 +6,7 @@ use App\Models\Cliente;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DocumentoClienteRequest;
 use App\Http\Requests\FormClienteRequest;
+use App\Models\Habitacion;
 use App\Models\TipoDocumento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -17,8 +18,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        return view ("home", ['tipo_documentos' => TipoDocumento::all()]);
-        
+        return view("home", ['tipo_documentos' => TipoDocumento::all()]);
     }
 
     /**
@@ -26,7 +26,6 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        
     }
     /**
      * Store a newly created resource in storage.
@@ -34,9 +33,9 @@ class ClienteController extends Controller
     public function store(FormClienteRequest $request)
     {
         $cliente = new Cliente();
-        $cliente ->fill($request->all());
+        $cliente->fill($request->all());
         $cliente->save();
-        
+        return view('habitaciones', ['cliente' => $cliente, 'habitacion'=>Habitacion::where('estado', 'Activo')->get() ]);
     }
 
     /**
@@ -72,13 +71,13 @@ class ClienteController extends Controller
     }
     public function registroValidar(DocumentoClienteRequest $request)
     {
-    $cliente = Cliente::where('numero_documento', $request->numero_documento)->first();
-    if ($cliente === null) {
-        // El cliente no está registrado, mostrar formulario de registro
-        return view('registro_cliente', ['tipo_documentos' => TipoDocumento::all()]);
-    } else {
-        // El cliente ya está registrado, mostrar formulario de reserva
-        //return view('reserva_cliente', ['cliente' => $cliente]);
-    }
+        $cliente = Cliente::where('numero_documento', $request->numero_documento)->first();
+        if ($cliente === null) {
+            // El cliente no está registrado, mostrar formulario de registro
+            return view('registro_cliente', ['tipo_documentos' => TipoDocumento::all()]);
+        } else {
+            // El cliente ya está registrado, mostrar formulario de reserva
+            return view('habitaciones', ['cliente' => $cliente, 'habitaciones'=>Habitacion::where('estado', 'Activo')->get() ]);
+        }
     }
 }

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\HabitacionController;
+use App\Models\Habitacion;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +21,11 @@ Route::get('/', [ClienteController::class, 'index'])->name('cliente.home');
 Route::get('/validar', [ClienteController::class, 'registroValidar'])->name('cliente.validar');
 
 Route::post('/registro', [ClienteController::class, 'store'])->name('cliente.registro');
+
+Route::get('/habitaciones', [HabitacionController::class, 'index'])->name('habitacion.index');
+
+Route::get('/habitacion_disponible', [HabitacionController::class, 'show'])->name('habitacion.disponible');
+
 
 
 

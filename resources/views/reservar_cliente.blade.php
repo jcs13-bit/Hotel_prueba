@@ -14,7 +14,6 @@
                 <strong>{{ $message }}</strong>
             </span>
             @enderror
-
         </div>
         <div class="form_group mt-4">
             <label for="numero_documento">Número de documento</label>
@@ -29,7 +28,7 @@
 
         <div class="form_group mt-4">
             <label for="numero_dias">Numero de dias:</label>
-            <input type="number"  readonly name="numero_dias" id="numero_dias" class="form-control">
+            <input type="number" readonly name="numero_dias" id="numero_dias" class="form-control">
         </div>
 
         <div class="form_group mt-4">
@@ -49,24 +48,24 @@
     </form>
 </div>
 <script>
-  // función para calcular el número de días entre dos fechas
-  function calcularNumeroDias() {
-    // obtener las fechas de inicio y fin
-    var fechaInicio = new Date(document.getElementById('fecha_inicio').value);
-    var fechaFin = new Date(document.getElementById('fecha_fin').value);
+    // función para calcular el número de días entre dos fechas
+    function calcularNumeroDias() {
+        // obtener las fechas de inicio y fin
+        var fechaInicio = new Date(document.getElementById('fecha_inicio').value);
+        var fechaFin = new Date(document.getElementById('fecha_fin').value);
 
-    // calcular la diferencia en milisegundos
-    var diferenciaMs = fechaFin - fechaInicio;
+        // calcular la diferencia en milisegundos
+        var diferenciaMs = fechaFin - fechaInicio;
 
-    // convertir la diferencia en días
-    var numeroDias = Math.round(diferenciaMs / (1000 * 60 * 60 * 24));
+        // convertir la diferencia en días
+        var numeroDias = Math.round(diferenciaMs / (1000 * 60 * 60 * 24));
 
-    // actualizar el campo de número de días
-    document.getElementById('numero_dias').value = numeroDias;
-  }
+        // actualizar el campo de número de días
+        document.getElementById('numero_dias').value = numeroDias;
+    }
 
-  // agregar eventos onchange a los campos de fecha
-  document.getElementById('fecha_inicio').addEventListener('change', calcularNumeroDias);
-  document.getElementById('fecha_fin').addEventListener('change', calcularNumeroDias);
+    // agregar eventos onchange a los campos de fecha
+    document.getElementById('fecha_inicio').addEventListener('change', calcularNumeroDias);
+    document.getElementById('fecha_fin').addEventListener('change', calcularNumeroDias);
 </script>
 @endsection("contenido")
