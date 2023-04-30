@@ -24,7 +24,7 @@
         </div>
 
         <div class="form_group mt-4">
-            <button type="submit" class="btn btn-primary">Registrar</button>
+            <button type="submit" class="btn btn-primary">Consultar</button>
         </div>
     </form>
 

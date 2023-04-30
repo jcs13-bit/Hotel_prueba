@@ -26,7 +26,7 @@ class HabitacionesRequest extends FormRequest
             'fecha_reserva' => [
                 'required',
                 'date',
-                'after_or_equal:today',
+                'after_or_equal:'.today()->format('d-m-Y')
             ],
             'cupo' => [
                 'required',
