@@ -1,13 +1,13 @@
 @extends("layout")
 @section("contenido")
 <div>
-    <form action="{{route('cliente.')}}" method="post">
+    <form action="{{route('habitacion.reserva', $cliente)}}" method="post">
         @csrf
         <div class="form_group mt-4">
             <label for="estado">Estado</label>
             <select name="estado" id="estado" class="form-control">
-                <option value="{{ $estado->'Activo' }}">{{ $estado->Activo }}</option>
-                <option value="{{ $estado->'Inactivo' }}">{{ $estado->Inactivo }}</option>
+                <option value="Activo">Activo</option>
+                <option value="Inactivo">Inactivo</option>
             </select>
             @error('estado')
             <span class="role-alert-danger" role="alert">
@@ -16,19 +16,14 @@
             @enderror
         </div>
         <div class="form_group mt-4">
-            <label for="numero_documento">Número de documento</label>
-            <input type="text" name="numero_documento" id="numero_documento" class="form-control" value="{{old('numero_documento')}}">
-            @error('numero_documento')
-            <span class="role-alert-danger" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
-        </div>
+            <label for="nombre_cliente">Nombre cliente:</label>
+            <input type="text" name="nombre_cliente" id="nombre_cliente" value="{{$cliente->nombre}} {{$cliente->apellido}}" class="form-control">
 
+        </div>
 
         <div class="form_group mt-4">
             <label for="numero_dias">Numero de dias:</label>
-            <input type="number" readonly name="numero_dias" id="numero_dias" class="form-control">
+            <input type="number" readonly name="numero_dias" id="numero_dias" class="form-control" on>
         </div>
 
         <div class="form_group mt-4">
@@ -38,13 +33,20 @@
 
         <div class="form_group mt-4">
             <label for="fecha_fin">Fecha de fin:</label>
-            <input type="date" name="fecha_fin" id="fecha_fin" class="form-control">
+            <input type="date" name="fecha_fin" id="fecha_fin" class="form-control" onchange="calcularNumeroDias()">
+        </div>
+
+        <div class="form_group mt-4">
+            <label for="encargado">Responsable:</label>
+            <input type="text" name="responsable" id="responsable"  class="form-control">
         </div>
 
 
         <div class="form_group mt-4">
             <button type="submit" class="btn btn-primary">Registrar</button>
         </div>
+        <input type="hidden" name="habitacion_id" id="habitacion_id"  value="{{$habitacion_id}}">
+
     </form>
 </div>
 <script>

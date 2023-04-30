@@ -35,7 +35,7 @@ class ClienteController extends Controller
         $cliente = new Cliente();
         $cliente->fill($request->all());
         $cliente->save();
-        return view('habitaciones', ['cliente' => $cliente, 'habitacion'=>Habitacion::where('estado', 'Activo')->get() ]);
+        return view('habitaciones', ['cliente' => $cliente, 'habitaciones'=>Habitacion::where('estado', 'Activo')->get() ]);
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Habitacion;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\HabitacionesRequest;
+use App\Models\Cliente;
 use Illuminate\Http\Request;
 
 class HabitacionController extends Controller
@@ -36,7 +37,7 @@ class HabitacionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(HabitacionesRequest $habitacion)
+    public function show(HabitacionesRequest $habitacion, Cliente $cliente)
     {
         $fecha = $habitacion->fecha_reserva;
         $cupo = $habitacion->cupo;
@@ -50,7 +51,7 @@ class HabitacionController extends Controller
         
         $habitacionesDisponibles = $habitacionesConCapacidad->union($habitacionesConReservasActivas);
 
-        return view('habitaciones', ['habitaciones' => $habitacionesDisponibles ]);
+        return view('habitaciones', ['habitaciones' => $habitacionesDisponibles ,'cliente' => $cliente]);
     }
 
     /**
