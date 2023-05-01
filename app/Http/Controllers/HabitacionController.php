@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\HabitacionesRequest;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HabitacionController extends Controller
 {
@@ -41,17 +42,14 @@ class HabitacionController extends Controller
     {
         $fecha = $habitacion->fecha_reserva;
         $cupo = $habitacion->cupo;
-        $habitacionesConReservasActivas = Habitacion::join('reservas', function ($join) use ($fecha) {
-            $join->on('habitaciones.id', '=', 'reservas.habitacion_id')
-                 ->where('reservas.estado', '=', 'Activo')
-                 ->where('reservas.fecha_inicio', '<=', $fecha)
-                 ->where('reservas.fecha_fin', '>=', $fecha);
-        })->select('habitaciones.*')->get();
-        $habitacionesConCapacidad = Habitacion::where('cupo', '=', $cupo)->get();
+        $habitacionesConReservasActivas = DB::table('reservas')->select('habitacion_id')->whereTime("reservas.fecha_inicio","<=",$fecha)->whereTime('reservas.fecha_fin', '>=', $fecha)->where('reservas.estado', '=', 'Activo')->get();
+        $habitacionesConCapacidad = Habitacion::where('cupo', '=', $cupo )->whereNotIn('id',$habitacionesConReservasActivas)->get();
+
         
+
         $habitacionesDisponibles = $habitacionesConCapacidad->union($habitacionesConReservasActivas);
 
-        return view('habitaciones', ['habitaciones' => $habitacionesDisponibles ,'cliente' => $cliente]);
+        return view('habitaciones', ['habitaciones' => $habitacionesConCapacidad, 'cliente' => $cliente]);
     }
 
     /**

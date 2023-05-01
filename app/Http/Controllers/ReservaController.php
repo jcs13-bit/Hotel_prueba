@@ -46,8 +46,9 @@ class ReservaController extends Controller
      */
     public function show(Reserva $reserva)
     {
-        //
+        return (view('reservaciones', ['reservas'=>Reserva::where('estado', 'Activo')->get()]));
     }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -62,7 +63,10 @@ class ReservaController extends Controller
      */
     public function update(Request $request, Reserva $reserva)
     {
-        //
+        $reservacion = Reserva::find($request->seleccionado);
+        $reservacion->estado = 'Inactivo'; // 'Activo' o 'Inactivo
+        $reservacion->save();
+        return (view('reservaciones', ['reservas'=>Reserva::where('estado', 'Activo')->get()]));
     }
 
     /**

@@ -31,6 +31,9 @@ Route::get('/reservacion/{cliente}', [ReservaController::class, 'create'])->name
 
 Route::post('/reserva/{cliente}', [ReservaController::class, 'store'])->name('habitacion.reserva');
 
+Route::get('/reservas', [ReservaController::class, 'show'])->name('reservas');
+Route::get('/reservacion_actualizar', [ReservaController::class, 'update'])->name('reservacion.actualizar');
+
 
 
 //Route::get('/registro-reserva', [ClienteController::class, 'index'])->name('cliente.registro-reserva');
