@@ -45,10 +45,6 @@ class HabitacionController extends Controller
         $habitacionesConReservasActivas = DB::table('reservas')->select('habitacion_id')->whereTime("reservas.fecha_inicio","<=",$fecha)->whereTime('reservas.fecha_fin', '>=', $fecha)->where('reservas.estado', '=', 'Activo')->get();
         $habitacionesConCapacidad = Habitacion::where('cupo', '=', $cupo )->whereNotIn('id',$habitacionesConReservasActivas)->get();
 
-        
-
-        $habitacionesDisponibles = $habitacionesConCapacidad->union($habitacionesConReservasActivas);
-
         return view('habitaciones', ['habitaciones' => $habitacionesConCapacidad, 'cliente' => $cliente]);
     }
 

@@ -38,35 +38,28 @@
 
         <div class="form_group mt-4">
             <label for="encargado">Responsable:</label>
-            <input type="text" name="responsable" id="responsable"  class="form-control">
+            <input type="text" name="responsable" id="responsable" class="form-control">
         </div>
 
 
         <div class="form_group mt-4">
             <button type="submit" class="btn btn-primary">Registrar</button>
         </div>
-        <input type="hidden" name="habitacion_id" id="habitacion_id"  value="{{$habitacion_id}}">
+        <input type="hidden" name="habitacion_id" id="habitacion_id" value="{{$habitacion_id}}">
 
     </form>
 </div>
 <script>
-    // función para calcular el número de días entre dos fechas
     function calcularNumeroDias() {
-        // obtener las fechas de inicio y fin
         var fechaInicio = new Date(document.getElementById('fecha_inicio').value);
         var fechaFin = new Date(document.getElementById('fecha_fin').value);
 
-        // calcular la diferencia en milisegundos
         var diferenciaMs = fechaFin - fechaInicio;
 
-        // convertir la diferencia en días
         var numeroDias = Math.round(diferenciaMs / (1000 * 60 * 60 * 24));
 
-        // actualizar el campo de número de días
         document.getElementById('numero_dias').value = numeroDias;
     }
-
-    // agregar eventos onchange a los campos de fecha
     document.getElementById('fecha_inicio').addEventListener('change', calcularNumeroDias);
     document.getElementById('fecha_fin').addEventListener('change', calcularNumeroDias);
 </script>

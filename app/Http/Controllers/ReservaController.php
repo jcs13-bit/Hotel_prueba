@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Reserva;
 use App\Http\Controllers\Controller;
 use App\Models\Cliente;
+use App\Models\Habitacion;
 use Illuminate\Http\Request;
 
 class ReservaController extends Controller
@@ -28,7 +29,7 @@ class ReservaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request )
+    public function store(Request $request, Cliente $cliente )
     {
         $reserva = new Reserva();
         $reserva->estado = $request->input('estado');
@@ -39,6 +40,7 @@ class ReservaController extends Controller
         $reserva->responsable = $request->input('responsable');
         $reserva->habitacion_id = $request->input('habitacion_id');
         $reserva->save();
+        return view('habitaciones', ['cliente' => $cliente, 'habitaciones'=>Habitacion::where('estado', 'Activo')->get() ]);
     }
 
     /**

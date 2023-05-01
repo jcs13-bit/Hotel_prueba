@@ -16,6 +16,9 @@
             <div class="col">
                 <h1>Hotel</h1>
             </div>
+            <div class="col">
+                <a href="{{ route('cliente.home') }}" class="btn btn-primary">Inicio</a>
+            </div>
         </div>
         <div class="container">
             @yield('contenido')
